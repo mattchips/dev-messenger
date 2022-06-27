@@ -1,6 +1,4 @@
-const fs = require('fs');
-const generatePage = () => {
-  return `
+
     <html lang="en">
       <head>
         <meta charset="UTF-8" />
@@ -40,27 +38,4 @@ const generatePage = () => {
         <script src="./custom.js"></script>
       </body>
     </html>
-  `;
-};
-
-//Express server
-
-const express = require('express')
-const app = express()
-const port = 3000
-
-app.get('/', (req, res) => {
-  res.end('Hello World!');
-});
-
-app.listen(port, () => {
-    console.log(`app listening at http://localhost:${port}`)
-  });
-
-//writing file
-
-fs.writeFile('index.html', generatePage(), err => {
-  if (err) throw err;
-
-  console.log('Portfolio complete! Check out index.html to see the output!');
-});
+  
