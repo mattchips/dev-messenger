@@ -1,3 +1,26 @@
+var express = require("express");
+var app = express();
+
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({extended: true}));
+
+// temp names until replaced with correct vars
+let friends = ['Josh', 'Alex', 'Dave', 'Melissa', 'Chris'];
+
+app.get("/", function(req, res){
+   res.redirect("/friends"); 
+});
+
+app.get("/friends", function(req, res){
+   res.render("friends.ejs", {friends: friends});
+});
+
+app.post("/addFriend", function(req, res){
+    let newFriend = req.body.newFriend;
+    friends.push(newFriend);
+    res.redirect("/friends");
+});
+
 const fs = require('fs');
 const generatePage = () => {
   return `
