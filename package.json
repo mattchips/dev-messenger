@@ -1,4 +1,17 @@
 {
+  "name": "testexpress4",
+  "version": "1.0.0",
+  "description": "Expressjs-ejs-bodyparser-friendslist",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  },
   "dependencies": {
     "express": "^4.18.1",
     "mysql2": "^2.3.3",
