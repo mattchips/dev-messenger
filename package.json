@@ -9,7 +9,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "devDependencies": {
-    "jest": "^28.1.1"
+    "jest": "^28.1.2"
   },
   "scripts": {
     "test": "jest",

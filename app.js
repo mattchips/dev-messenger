@@ -47,13 +47,9 @@ const generatePage = () => {
 // Initializing the Javascript SDK
 let client, channel, username, activeUser;
 
-client = new StreamChat('<STREAM_APP_KEY>');
+client = new StreamChat('n5dyzcagg6zw');
 
-// > Again, make sure to replace the `<STREAM_APP_KEY>` placeholder with your own key.
-// Next, add a function for generating token to the `public/custom.js` file:
-// ```js
-// [...]
-
+// Generating Token
 async function generateToken(username) {
   const { token } = (await axios.get(`/token?username=${username}`)).data;
   return token;
