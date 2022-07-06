@@ -13,14 +13,14 @@
 // app.use(express.urlencoded({ extended: false }));
 // app.use(express.json());
 
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-  res.status(404).end();
-});
+// // Default response for any other request (Not Found)
+// app.use((req, res) => {
+//   res.status(404).end();
+// });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
 
 const express = require('express');
 const app = express();
@@ -51,15 +51,15 @@ app.get('/token', (req, res) => {
   }
 });
 
-//mysql database
-const db = mysql.createConnection(
-    {
-      host: 'localhost',
-      // Your MySQL username,
-      user: 'root',
-      // Your MySQL password
-      password: '',
-      database: 'election'
-    },
-    console.log('Connected to the election database.')
-  );
+// //mysql database
+// const db = mysql.createConnection(
+//     {
+//       host: 'localhost',
+//       // Your MySQL username,
+//       user: 'root',
+//       // Your MySQL password
+//       password: '',
+//       database: 'election'
+//     },
+//     console.log('Connected to the election database.')
+//   );
