@@ -73,6 +73,8 @@ async function initializeClient() {
     token
   ); // token generated from our Node server
 
+  await listUsers();
+
   return client;
 }
 
@@ -102,6 +104,66 @@ async function checkAuthState() {
   };
 };
 
+//populate users
+function populateUsers(users) {
+  // remove the current users from the list of users
+  const otherUsers = users.filter(user => user.id !== username);
+
+  const usersElement = document.getElementById('users');
+  otherUsers.map(user => {
+    const userElement = document.createElement('div');
+
+    userElement.className = 'user';
+    userElement.id = user.id;
+    userElement.textContent = user.id;
+    userElement.onclick = () => selectUserHandler(user);
+
+    usersElement.append(userElement);
+  });
+}
+
+//user handler
+async function selectUserHandler(userPayload) {
+  if (activeUser === userPayload.id) return; // current active user, so do not proceed...
+
+  activeUser = userPayload.id;
+
+  // remove the 'active' class from all users
+  const allUsers = document.getElementsByClassName('user');
+  Array.from(allUsers).forEach(user => {
+    user.classList.remove('active');
+  });
+
+  // add the 'active' class to the current selected user
+  const userElement = document.getElementById(userPayload.id);
+  userElement.classList.add('active');
+
+  // remove all previous messages in the message container...
+  const messageContainer = document.getElementById('messages');
+  messageContainer.innerHTML = '';
+
+  await initializeChannel([username, userPayload.id]);
+}
+
+//list users
+async function listUsers() {
+  const filters = {};
+  const response = await client.queryUsers(filters);
+
+  populateUsers(response.users);
+  return response;
+}
+
+// Initialize channel
+async function initializeChannel(members) {
+  //members => array of users, [user1, user2]
+  channel = client.channel('messaging', {
+    members: members,
+    session: 8 // custom field, you can add as many as you want
+  });
+
+  await channel.watch();
+}
 //Express server
 
 // const express = require('express')
