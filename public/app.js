@@ -1,4 +1,5 @@
-const fs = require('fs');
+// const fs = require('fs');
+let client, channel, username, activeUser;
 const generatePage = () => {
   return `
     <html lang="en">
@@ -37,7 +38,7 @@ const generatePage = () => {
         <!-- for making http requests -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- Our custom JavaScript code -->
-        <script src="./custom.js"></script>
+        <script src="./app.js"></script>
       </body>
     </html>
   `;
@@ -45,16 +46,19 @@ const generatePage = () => {
 
 
 // Initializing the Javascript SDK
-let client, channel, username, activeUser;
 
-client = new StreamChat('n5dyzcagg6zw');
+client = new StreamChat('g3cfvczbux98');
+// ```
+// > Again, make sure to replace the `<g3cfvczbux98>` placeholder with your own key.
+// Next, add a function for generating token to the `;public/app.js` file:
+// ```;js
+// // [...]
 
-// Generating Token
+//Generate Token
 async function generateToken(username) {
   const { token } = (await axios.get(`/token?username=${username}`)).data;
   return token;
-}
-
+};
 
 //setting current user for client SDK
 async function initializeClient() {
@@ -73,7 +77,7 @@ async function initializeClient() {
 }
 
 
-//User to enter messages
+//listening to input
 const user = document.getElementById('user-login-input');
 
 user.addEventListener('keyup', function(event) {
@@ -95,8 +99,8 @@ async function checkAuthState() {
 
     document.getElementsByClassName('chat-container')[0].style.display = 'grid';
     document.getElementById('login-block').style.display = 'none';
-  }
-}
+  };
+};
 
 //Express server
 
