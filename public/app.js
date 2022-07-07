@@ -1,8 +1,5 @@
 // const fs = require('fs');
-<<<<<<< HEAD
-=======
 let client, channel, username, activeUser;
->>>>>>> 91ba9f7a8f5a1fb64913b2279b44aa2d8c599d34
 const generatePage = () => {
   return `
     <html lang="en">
@@ -51,14 +48,6 @@ const generatePage = () => {
 // Initializing the Javascript SDK
 
 client = new StreamChat('g3cfvczbux98');
-<<<<<<< HEAD
-=======
-// ```
-// > Again, make sure to replace the `<g3cfvczbux98>` placeholder with your own key.
-// Next, add a function for generating token to the `;public/app.js` file:
-// ```;js
-// // [...]
->>>>>>> 91ba9f7a8f5a1fb64913b2279b44aa2d8c599d34
 
 //Generate Token
 async function generateToken(username) {
@@ -128,7 +117,6 @@ function populateUsers(users) {
   });
 }
 
-<<<<<<< HEAD
 // Listing Users
 function populateUsers(users) {
   // remove the current users from the list of users
@@ -147,9 +135,6 @@ function populateUsers(users) {
   });
 }
 
-=======
-//user handler
->>>>>>> 91ba9f7a8f5a1fb64913b2279b44aa2d8c599d34
 async function selectUserHandler(userPayload) {
   if (activeUser === userPayload.id) return; // current active user, so do not proceed...
 
@@ -172,11 +157,7 @@ async function selectUserHandler(userPayload) {
   await initializeChannel([username, userPayload.id]);
 }
 
-<<<<<<< HEAD
-//fetch and list!
-=======
 //list users
->>>>>>> 91ba9f7a8f5a1fb64913b2279b44aa2d8c599d34
 async function listUsers() {
   const filters = {};
   const response = await client.queryUsers(filters);
@@ -185,11 +166,7 @@ async function listUsers() {
   return response;
 }
 
-<<<<<<< HEAD
 //Initializing Channel
-=======
-// Initialize channel
->>>>>>> 91ba9f7a8f5a1fb64913b2279b44aa2d8c599d34
 async function initializeChannel(members) {
   //members => array of users, [user1, user2]
   channel = client.channel('messaging', {
@@ -198,7 +175,6 @@ async function initializeChannel(members) {
   });
 
   await channel.watch();
-<<<<<<< HEAD
 
   channel.on('message.new', event => {
     appendMessage(event.message);
@@ -255,9 +231,6 @@ inputElement.addEventListener('keyup', function(event) {
 });
 
 
-=======
-}
->>>>>>> 91ba9f7a8f5a1fb64913b2279b44aa2d8c599d34
 //Express server
 
 // const express = require('express')
