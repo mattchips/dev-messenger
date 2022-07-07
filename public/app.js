@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 const generatePage = () => {
   return `
     <html lang="en">
@@ -7,7 +7,7 @@ const generatePage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <link rel="stylesheet" href="./style.css" />
-        <title>Vanilla PHP and JavaScript Stream Group Chat</title>
+        <title>Dev-messenger</title>
       </head>
       <body>
         <div class="main-container">
@@ -37,7 +37,7 @@ const generatePage = () => {
         <!-- for making http requests -->
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <!-- Our custom JavaScript code -->
-        <script src="./custom.js"></script>
+        <script src="./app.js"></script>
       </body>
     </html>
   `;
@@ -47,7 +47,7 @@ const generatePage = () => {
 // Initializing the Javascript SDK
 let client, channel, username, activeUser;
 
-client = new StreamChat('n5dyzcagg6zw');
+client = new StreamChat('g3cfvczbux98');
 
 // Generating Token
 async function generateToken(username) {
@@ -68,6 +68,8 @@ async function initializeClient() {
     },
     token
   ); // token generated from our Node server
+
+  await listUsers();
 
   return client;
 }
@@ -97,6 +99,120 @@ async function checkAuthState() {
     document.getElementById('login-block').style.display = 'none';
   }
 }
+
+// Listing Users
+function populateUsers(users) {
+  // remove the current users from the list of users
+  const otherUsers = users.filter(user => user.id !== username);
+
+  const usersElement = document.getElementById('users');
+  otherUsers.map(user => {
+    const userElement = document.createElement('div');
+
+    userElement.className = 'user';
+    userElement.id = user.id;
+    userElement.textContent = user.id;
+    userElement.onclick = () => selectUserHandler(user);
+
+    usersElement.append(userElement);
+  });
+}
+
+async function selectUserHandler(userPayload) {
+  if (activeUser === userPayload.id) return; // current active user, so do not proceed...
+
+  activeUser = userPayload.id;
+
+  // remove the 'active' class from all users
+  const allUsers = document.getElementsByClassName('user');
+  Array.from(allUsers).forEach(user => {
+    user.classList.remove('active');
+  });
+
+  // add the 'active' class to the current selected user
+  const userElement = document.getElementById(userPayload.id);
+  userElement.classList.add('active');
+
+  // remove all previous messages in the message container...
+  const messageContainer = document.getElementById('messages');
+  messageContainer.innerHTML = '';
+
+  await initializeChannel([username, userPayload.id]);
+}
+
+//fetch and list!
+async function listUsers() {
+  const filters = {};
+  const response = await client.queryUsers(filters);
+
+  populateUsers(response.users);
+  return response;
+}
+
+//Initializing Channel
+async function initializeChannel(members) {
+  //members => array of users, [user1, user2]
+  channel = client.channel('messaging', {
+    members: members,
+    session: 8 // custom field, you can add as many as you want
+  });
+
+  await channel.watch();
+
+  channel.on('message.new', event => {
+    appendMessage(event.message);
+  });
+
+  channel.state.messages.forEach(message => {
+    appendMessage(message);
+  });
+}
+
+//Append message to DOM
+function appendMessage(message) {
+  const messageContainer = document.getElementById('messages');
+
+  // Create and append the message div
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${
+    message.user.id === username ? 'message-right' : 'message-left'
+  }`;
+
+  // Create the username div
+  const usernameDiv = document.createElement('div');
+  usernameDiv.className = 'message-username';
+  usernameDiv.textContent = `${message.user.id}:`;
+
+  // Append the username div to the MessageDiv
+  messageDiv.append(usernameDiv);
+
+  // Create the main message text div
+  const messageTextDiv = document.createElement('div');
+  messageTextDiv.textContent = message.text;
+
+  // Append the username div to the MessageDiv
+  messageDiv.append(messageTextDiv);
+
+  // Then append the messageDiv to the "messages" div
+  messageContainer.appendChild(messageDiv);
+}
+
+//Exchanging Messsages
+async function sendMessage(message) {
+  return await channel.sendMessage({
+    text: message
+  });
+}
+
+const inputElement = document.getElementById('message-input');
+
+inputElement.addEventListener('keyup', function(event) {
+  if (event.key === 'Enter') {
+    sendMessage(inputElement.value);
+    inputElement.value = '';
+  }
+});
+
 
 //Express server
 
