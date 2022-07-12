@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(8800, () => {
-  console.log('Example app listening on port 8800!');
+  console.log('Dev-messenger app listening on port 8800!');
 });
 
 // generating tokens
