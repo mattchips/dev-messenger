@@ -2,27 +2,29 @@
 var express = require("express");
 var app = express();
 //Assigning PORT number 
-const PORT = 3000; 
-const path =require('path'); 
+const PORT = 3000;
+const path = require('path');
+//Sequlize 
+const sequelize = require('./config/connection');
 
 var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // temp names until replaced with correct vars
 let friends = ['Josh', 'Alex', 'Dave', 'Melissa', 'Chris'];
 
-app.get("/", function(req, res){
+app.get("/", function (req, res) {
   res.redirect("/register"); //reditect to account creation page 
 });
 
-app.get("/friends", function(req, res){
-   res.render("friends.ejs", {friends: friends});
+app.get("/friends", function (req, res) {
+  res.render("friends.ejs", { friends: friends });
 });
 
-app.post("/addFriend", function(req, res){
-    let newFriend = req.body.newFriend;
-    friends.push(newFriend);
-    res.redirect("/friends");
+app.post("/addFriend", function (req, res) {
+  let newFriend = req.body.newFriend;
+  friends.push(newFriend);
+  res.redirect("/friends");
 });
 
 const fs = require('fs');
@@ -124,22 +126,26 @@ async function checkAuthState() {
     document.getElementById('login-block').style.display = 'none';
   }
 }
-*/ 
+*/
 //Temporary commented rom line 73-127
 
-app.get("/register", function(req, res){
+app.get("/register", function (req, res) {
   //render Account creation  page 
   res.render("register.ejs");
 });
 
-app.get("/login", function(req, res){
+app.get("/login", function (req, res) {
   //render login page 
   res.render("login.ejs");
 });
 
-app.listen(PORT, () => {
+// turn on connection to db and server
+sequelize.sync({ force: false }).then(() => {
+  console.log("connected to database ...."); 
+  app.listen(PORT, () => {
     console.log(`app listening at http://localhost:${PORT}`)
   });
+});
 
 //writing file
 
