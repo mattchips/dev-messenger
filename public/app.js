@@ -44,7 +44,6 @@ const generatePage = () => {
   `;
 };
 
-
 // Initializing the Javascript SDK
 
 client = new StreamChat('g3cfvczbux98');
