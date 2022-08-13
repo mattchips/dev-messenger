@@ -1,9 +1,12 @@
 {
   "dependencies": {
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
+    "get-stream": "^6.0.1",
+    "inquirer": "^8.0.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.2",
     "sqlite3": "^5.0.8",

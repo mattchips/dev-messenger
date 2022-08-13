@@ -40,7 +40,7 @@ app.listen(8800, () => {
 });
 
 // generating tokens
-const serverClient = new StreamChat('g3cfvczbux98', 'h9h4k4etue4ghnb7hzsdjjksdmm6tm3tzhcnbh9ft7xuqdg32xybx7uy3s8xesuz');
+const serverClient = new StreamChat('5uzparpdtaxp', '7u96k7gdd73pjjyp6p8nmt88ykb59renv6422hk3vus9pbgm854d696j44h93aka');
 
 app.get('/token', (req, res) => {
   const { username } = req.query;
