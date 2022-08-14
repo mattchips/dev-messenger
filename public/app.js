@@ -43,6 +43,13 @@ let client, channel, username, activeUser;
 //   `;
 // };
 
+// //Stream integration
+// var stream = require('getstream');
+// // Instantiate a new client (server side)
+// client = stream.connect('g3cfvczbux98', 'h9h4k4etue4ghnb7hzsdjjksdmm6tm3tzhcnbh9ft7xuqdg32xybx7uy3s8xesuz', '1197780');
+// // Instantiate a new client (client side)
+// client = stream.connect('g3cfvczbux98', null, '1197780');
+// // Find your API keys here https://getstream.io/dashboard/
 
 // Initializing the Javascript SDK
 
@@ -53,6 +60,7 @@ async function generateToken(username) {
   const { token } = (await axios.get(`/token?username=${username}`)).data;
   return token;
 };
+
 
 //setting current user for client SDK
 async function initializeClient() {
