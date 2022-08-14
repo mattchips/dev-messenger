@@ -1,9 +1,10 @@
 let client, channel, username, activeUser;
-var stream = require('getstream');
-// Instantiate a new client (server side)
-client = stream.connect('5uzparpdtaxp', '7u96k7gdd73pjjyp6p8nmt88ykb59renv6422hk3vus9pbgm854d696j44h93aka', '1204534');
-// Instantiate a new client (client side)
-client = stream.connect('5uzparpdtaxp', null, '1204534');
+// const inquirer = require('inquirer');
+// const stream = require('getstream');
+// // Instantiate a new client (server side)
+// client = stream.connect('5uzparpdtaxp', '7u96k7gdd73pjjyp6p8nmt88ykb59renv6422hk3vus9pbgm854d696j44h93aka', '1204534');
+// // Instantiate a new client (client side)
+// client = stream.connect('5uzparpdtaxp', null, '1204534');
 // Find your API keys here https://getstream.io/dashboard/
 // const generatePage = () => {
 //   return `
