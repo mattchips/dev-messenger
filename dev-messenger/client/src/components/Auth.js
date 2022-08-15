@@ -1,4 +1,5 @@
 import { useState } from "react"
+import axios from 'axios'
 
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(true)
@@ -10,18 +11,25 @@ const Auth = () => {
     console.log(username);
     console.log(password);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log('submitted!')
         if (password !== confirmpassword) {
             setError(true)
             return
         }
+
+        const response = await axios.post(`http://localhost:8000/signup`, {
+            username,
+            password,
+        })
+
+        console.log(response);
     }
 
     return (
         <div className="auth-container">
             <div className="auth-container-box">
-                <div className="auth-container-from">
+                <div className="auth-container-form">
                     <input
                         type="text"
                         id="username"
@@ -44,7 +52,17 @@ const Auth = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />}
                     {error && <p>* Make sure passwords match</p>}
-                    <button onClick={handleSubmit}>GO!</button>
+                    <button className="standard-button" onClick={handleSubmit}>GO!</button>
+                </div>
+                <div className="auth-options">
+                    <button 
+                        onClick={() => setIsLogin(false)}
+                        style={{ backgroundColor: !isLogin ? '#151a1f' : '#070a0d' }}
+                        >Sign Up</button>
+                    <button 
+                        onClick={() => setIsLogin(true)}
+                        style={{ backgroundColor: isLogin ? '#151a1f' : '#070a0d' }}
+                        >Login</button>
                 </div>
             </div>
         </div>
