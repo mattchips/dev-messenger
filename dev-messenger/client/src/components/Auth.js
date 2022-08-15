@@ -1,7 +1,9 @@
 import { useState } from "react"
 import axios from 'axios'
+import { useCookies} from 'react-cookie'
 
 const Auth = () => {
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
     const [isLogin, setIsLogin] = useState(true)
     const [username, setUsername] = useState(null)
     const [password, setPassword] = useState(null)
@@ -24,6 +26,13 @@ const Auth = () => {
         })
 
         console.log(response);
+
+        setCookie('Name', response.data.username)
+        setCookie('HashedPassword', response.data.hashedPassword)
+        setCookie('AuthToken', response.data.token)
+        setCookie('UserId', response.data.userId)
+
+        window.location.reload()
     }
 
     return (

@@ -10,44 +10,41 @@ import Auth from './components/Auth';
 import MessagingContainer from './components/MessagingContainer';
 import Video from './components/Video';
 import '@stream-io/stream-chat-css/dist/css/index.css';
-
-const filters = { type: 'messaging' };
-const options = { state: true, presence: true, limit: 10 };
-const sort = { last_message_at: -1 };
+import { useCookies} from 'react-cookie'
 
 const client = StreamChat.getInstance('5uzparpdtaxp');
 
 const App = () => {
-  const [clientReady, setClientReady] = useState(false);
+  const [cookies, setCookie, removeCookie] = useCookies(['user'])
   const [channel, setChannel] = useState(null);
 
-  const authToken = false;
+  const authToken = cookies.AuthToken
 
-  useEffect(() => {
-    const setupClient = async () => {
-      try {
-        await client.connectUser(
-          {
-            id: 'adrian-szeto',
-            name: 'Adrian Szeto',
-          },
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWRyaWFuLXN6ZXRvIn0.A0_DElZ0BhkEXtYFcgYLfkissxJkExz2VUGvPTni8CA',
-        );
-        const channel = await client.channel('messaging', 'messaging-demo', {
-          name: 'Messaging Demo',
-        })
-        setChannel(channel);
+  // useEffect(() => {
+    
+  // }, []);
 
-        setClientReady(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+  const setupClient = async () => {
+    try {
+      await client.connectUser(
+        {
+          id: cookies.UserId,
+          name: cookies.Name,
+          hashedPassword: cookies.HashedPassword,
+        },
+        authToken
+      );
+      const channel = await client.channel('messaging', 'messaging-demo', {
+        name: 'Messaging Demo',
+      })
+      setChannel(channel);
 
-    setupClient();
-  }, []);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  if (!clientReady) return null;
+  if (authToken) setupClient();
 
   return (
     <>
