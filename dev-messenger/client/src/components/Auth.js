@@ -10,29 +10,24 @@ const Auth = () => {
     const [confirmpassword, setConfirmPassword] = useState(null)
     const [error, setError] = useState(false)
 
-    console.log(username);
-    console.log(password);
-
-    const handleSubmit = async () => {
-        console.log('submitted!')
-        if (password !== confirmpassword) {
+    const handleSubmit = async (endpoint) => {
+        console.log(endpoint)
+        if (!isLogin && password !== confirmpassword) {
             setError(true)
             return
         }
 
-        const response = await axios.post(`http://localhost:8000/signup`, {
+        const response = await axios.post(`http://localhost:8000/${endpoint}`, {
             username,
             password,
         })
-
-        console.log(response);
 
         setCookie('Name', response.data.username)
         setCookie('HashedPassword', response.data.hashedPassword)
         setCookie('AuthToken', response.data.token)
         setCookie('UserId', response.data.userId)
 
-        window.location.reload()
+        window.location.reload() 
     }
 
     return (
@@ -61,7 +56,7 @@ const Auth = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />}
                     {error && <p>* Make sure passwords match</p>}
-                    <button className="standard-button" onClick={handleSubmit}>GO!</button>
+                    <button className="standard-button" onClick={() => handleSubmit(isLogin ? 'login' : 'signup')}>GO!</button>
                 </div>
                 <div className="auth-options">
                     <button 

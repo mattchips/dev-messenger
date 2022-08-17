@@ -1,14 +1,42 @@
 import { ChannelHeader, MessageInput, MessageList, Thread, Window} from "stream-chat-react";
-import React from "react";
+import {useState} from "react";
+import { useCookies} from 'react-cookie'
+import UserList from "./UserList"
+import { FaUsers, FaArrowAltCircleLeft} from 'react-icons/fa'
 
-const MessagingContainer = () => {
+const MessagingContainer = ({users}) => {
+    const [cookies, setCookie, removeCookie] = useCookies(['user'])
+    const [userListVisible, setUserListVisible] = useState(false)
+
+    const logout = () => {
+        removeCookie('Name', cookies.Name)
+        removeCookie('HashedPassword', cookies.HashedPassword)
+        removeCookie('AuthToken', cookies.Authtoken)
+        removeCookie('UserId', cookies.UserId)
+        window.location.reload()
+    }
     return(
         <div className="messaging-container">
-            <Window>
-                <ChannelHeader />
-                <MessageList />
-                <MessageInput />
-            </Window>
+            {!userListVisible && (
+                <Window>
+                    <FaUsers className="icon" onClick={() => setUserListVisible(true)}/>
+                    <ChannelHeader />
+                    <MessageList />
+                    <MessageInput />
+                    <button className="standard-button" onClick={logout}>Logout</button>
+                </Window>
+            )}
+            {userListVisible && (
+                <Window>
+                    <div className="chat-container">
+                    <FaArrowAltCircleLeft className="icon" onClick={() => setUserListVisible(false)} />
+                    <ChannelHeader title='Users'/>
+                    <UserList users={users}/>
+                    </div>
+                </Window>
+
+            )}
+            
             <Thread />
         </div>
     )
