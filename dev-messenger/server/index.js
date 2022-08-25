@@ -10,10 +10,6 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 
-// const APP_ID = '1204534'
-// const API_KEY = '5uzparpdtaxp'
-// const API_SECRET = '7u96k7gdd73pjjyp6p8nmt88ykb59renv6422hk3vus9pbgm854d696j44h93aka'
-
 //sign up
 app.post('/signup', async (req,res) => {
     try{
