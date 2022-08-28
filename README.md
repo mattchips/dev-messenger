@@ -11,7 +11,7 @@ Dev Messenger is an application that allows user to communicate through channels
 * CORS
 * Stream-Chat
 * Web-vitals
-<br/>
+
 ## Usage
 * On one terminal, go to the server directory and input "npm run start:backend" to start the server
 * On another terminal, go to the client directory and input "npm run start:frontend" to run the react application on a browser window
