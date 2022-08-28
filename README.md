@@ -22,6 +22,13 @@ Dev Messenger is an application that allows user to communicate through channels
 * Sign/login to enter a chat channel
 * Select the icon on the top right of the chat to view other users
 * Select logout to logout of the chat channel
+
+<br/>
+Walkthrough video: 
+
+[dev-messenger.webm](https://user-images.githubusercontent.com/100250064/187086976-1a4e815a-63a9-4be4-9e16-27f12c4135fb.webm)
+
+
 <br/>
 Login/Signup Page: <br/>
 
