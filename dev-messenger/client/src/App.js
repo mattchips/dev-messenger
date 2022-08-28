@@ -11,7 +11,7 @@ import Video from './components/Video';
 import '@stream-io/stream-chat-css/dist/css/index.css';
 import { useCookies} from 'react-cookie'
 
-const client = StreamChat.getInstance('5uzparpdtaxp');
+const client = StreamChat.getInstance(process.env.API_KEY);
 
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(['user'])
