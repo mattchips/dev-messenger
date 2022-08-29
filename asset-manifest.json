@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/dev-messenger/static/css/main.b7c1e851.css",
+    "main.js": "/dev-messenger/static/js/main.05d82c2c.js",
+    "static/js/717.52968f2f.chunk.js": "/dev-messenger/static/js/717.52968f2f.chunk.js",
+    "static/js/291.48851302.chunk.js": "/dev-messenger/static/js/291.48851302.chunk.js",
+    "static/js/303.dd458107.chunk.js": "/dev-messenger/static/js/303.dd458107.chunk.js",
+    "static/js/829.a112b4d5.chunk.js": "/dev-messenger/static/js/829.a112b4d5.chunk.js",
+    "static/media/EmojiOneColor.woff2": "/dev-messenger/static/media/EmojiOneColor.90ee5fb894c8d349bc54.woff2",
+    "static/media/NotoColorEmoji-flags.woff2": "/dev-messenger/static/media/NotoColorEmoji-flags.148141acfb7ce6e4f383.woff2",
+    "index.html": "/dev-messenger/index.html",
+    "main.b7c1e851.css.map": "/dev-messenger/static/css/main.b7c1e851.css.map",
+    "main.05d82c2c.js.map": "/dev-messenger/static/js/main.05d82c2c.js.map",
+    "717.52968f2f.chunk.js.map": "/dev-messenger/static/js/717.52968f2f.chunk.js.map",
+    "291.48851302.chunk.js.map": "/dev-messenger/static/js/291.48851302.chunk.js.map",
+    "303.dd458107.chunk.js.map": "/dev-messenger/static/js/303.dd458107.chunk.js.map",
+    "829.a112b4d5.chunk.js.map": "/dev-messenger/static/js/829.a112b4d5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b7c1e851.css",
+    "static/js/main.05d82c2c.js"
+  ]
+}
