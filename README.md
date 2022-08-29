@@ -17,6 +17,7 @@ Dev Messenger is an application that allows user to communicate through channels
 * Gianni Mejia
 
 ## Usage
+* Create an account on https://getstream.io/accounts/login/ and replace API_KEY, APP_ID, API_SECRET with account credentials (can be found on the server/server.js)
 * On one terminal, go to the server directory and input "npm run start:backend" to start the server
 * On another terminal, go to the client directory and input "npm run start:frontend" to run the react application on a browser window
 * Sign/login to enter a chat channel
